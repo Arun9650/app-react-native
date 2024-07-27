@@ -1,59 +1,121 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, Text, View, ScrollView, Dimensions, TouchableOpacity } from "react-native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { HelloWave } from "@/components/HelloWave";
+import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { Feather } from "@expo/vector-icons";
+import { Octicons } from "@expo/vector-icons";
+import { SafeAreaView ,  } from "react-native-safe-area-context";
+import MatchPrediction from "@/components/MatchPrediction";
+import { useState } from "react";
 
 export default function HomeScreen() {
+  
+
+
+  const MatchItems = Array.from({ length: 10 });
+
+  const items = [
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+    {
+      title: "Cricket",
+      image: require("../../assets/images/bitcoin.png"),
+    },
+  ]
+
+
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginVertical: 12,
+        }}
+        >
+        <Feather name="user" size={24} color="black" />
+        <Octicons name="bell" size={24} color="black" />
+      </View>
+      <Image
+        source={require("../../assets/images/swimmer.png")}
+        width={250}
+        height={200}
+        alt="swimmer"
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    
+    <ScrollView style={styles.horizontalContainer} horizontal showsHorizontalScrollIndicator={false} > 
+      {
+        items.map((item, index) => {
+          return (
+            <HelloWave
+            key={index}
+            title={item.title}
+            image={item.image}
+            />
+          )
+        })
+      }
+    </ScrollView>
+    <View style={styles.MatchPredictionContainer} >
+      {
+        MatchItems.map((_, index) => (
+          <MatchPrediction key={index} />
+        ))
+      }
+    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
   stepContainer: {
@@ -65,6 +127,24 @@ const styles = StyleSheet.create({
     width: 290,
     bottom: 0,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
+  },
+  container: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  horizontalContainer: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 20,
+    overflow: "scroll",
+    borderColor: "black",
+    borderWidth: 0.5,
+    marginVertical: 10,
+
+  },
+  MatchPredictionContainer: {
+    backgroundColor: '#f0f0f0',
+
   },
 });
